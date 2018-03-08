@@ -28,6 +28,12 @@ During this phase several 'code' files are produced from the {corpus} representi
   - {endings}
   - vocabulary of most frequent {words} to avoid segmentation
 
+**Terminology of word parts**
+Splitting "unbelievables":
+
+| prefix | root   | suffix | ending | 
+|  un    | believ |  abl  |  es   | 
+
 **Running the learning script**:
 
 ```sh
@@ -43,12 +49,12 @@ During this phase several 'code' files are produced from the {corpus} representi
 
 All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tuned. Fitness conditions for roots and endings (not represented in parameters) are hardcoded.
 
-**Example configuration** used for **Latvian** (produced files see in 'codefiles-lv' directory):
+**Sample configuration** used for **Latvian** (produced files see in 'codefiles-lv' directory):
 ```sh
 (python) ./learn_prpe.py -i corpus.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
 ```
 
-**Example configuration** used for **English** (produced files see in 'codefiles-en' directory):
+**Sample configuration** used for **English** (produced files see in 'codefiles-en' directory):
 ```sh
 (python) ./learn_prpe.py -i corpus.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
 ```
@@ -114,9 +120,11 @@ Value 1 -- uppercase processing OFF:
 *Unbeliev/ able sales/ person/ s*
 
 **C: Marking mode**
-Although there are modes 0,, 1, 2, 3 available, we suggest using mode 3 (marker indicates that the next segment is of the same word)
+Although there are modes 0, 1, 2, 3 available, we suggest using mode 3 (marker indicates that the next segment is of the same word)
 
-**Example configuration** of segmentation used for **English** (paramaters for markers omitted):
+Examples of valid segmentation modes: 3, 103, 2103, 1003
+
+**Sample configuration** of segmentation used for **English** (paramaters for markers omitted):
 ```sh
 (python) ./apply_prpe.py -i input.en -o output.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -l en -d 2103
 ```
