@@ -55,12 +55,12 @@ where postfix "ables" consists of:
 
 All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tuned. Fitness conditions for roots and endings (not represented in parameters) are hardcoded.
 
-**Sample configuration** used for **Latvian** (produced files see in 'codefiles-lv' directory):
+**Sample configuration** used for **Latvian** (see produced files in 'codefiles-lv' directory):
 ```sh
 (python) ./learn_prpe.py -i corpus.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
 ```
 
-**Sample configuration** used for **English** (produced files see in 'codefiles-en' directory):
+**Sample configuration** used for **English** (see produced files in 'codefiles-en' directory):
 ```sh
 (python) ./learn_prpe.py -i corpus.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
 ```
