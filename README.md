@@ -1,4 +1,4 @@
-# PRPE (Prefix-Root-Postfix-Encoding) Segmentator
+# PRPE (Prefix-Root-Postfix-Encoding) Segmenter
 
 This repository contains python (2 and 3) text segmentation scripts for machine translation.
 
