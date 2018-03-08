@@ -9,7 +9,7 @@ This repository contains python (2 and 3) text segmentation scripts for machine 
   - Requires minor adaptation for using in other languages:
   -- small source code changes
   -- tuning of hyperparameters
-  - to support open-vocabulary (in machine translation), segmented texts should be post-processed (i.e., using [BPE])
+  - to support open-vocabulary (in machine translation), segmented texts should be post-processed (e.g., using [BPE])
 
 ## Usage instructions
 
@@ -39,9 +39,9 @@ During this phase several 'code' files are produced from the {corpus} representi
   - suffix rate: how many suffixes to collect (greater than 1 means exact number, less means percentage)
   - postfix rate: how many postfixes to collect (greater than 1 means exact number, less means percentage) (in the latest version this particular parameter is redundant)
   - vocabulary size: how many the most frequent words to store to avoid segmentations for them (in order to reduce number of segments)
-  - language: for the present, only 'lv' and 'en' are acceptable; otherwise 'en' scripts to check word parts will be switched
+  - language: for the present, only 'lv' and 'en' are acceptable; otherwise 'en' scripts will be run
 
-All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tuned. Conditions for roots and endings (not represented in parameters) are hardcoded.
+All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tuned. Fitness conditions for roots and endings (not represented in parameters) are hardcoded.
 
 **Example configuration** used for **Latvian** (produced files see in 'codefiles-lv' directory):
 ```sh
@@ -121,7 +121,7 @@ Although there are modes 0,, 1, 2, 3 available, we suggest using mode 3 (marker 
 (python) ./apply_prpe.py -i input.en -o output.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -l en -d 2103
 ```
 
-### Phase #3. Removing segmentation ([unprocess_prpe.py])
+### 3. Removing segmentation ([unprocess_prpe.py])
 
 During this operation, a segmented text is coverted back to a normal text:
 
@@ -138,7 +138,7 @@ will convert text
 back into
 *"Unbelievable salespersons"*
 
-### Adaptation to other languages
+### 4. Adaptation to other languages
 
 To make the adaptation, it is unfortunately required that you have some understanding about the language.
 
