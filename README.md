@@ -147,6 +147,15 @@ A brief activity list for adaptaion:
   - run learning phase with looser hyperparameters for code files, i.e., "-a 1000 -b 0.1 -c 0.1"
   - go through the code files (prefixes, postfixes, suffixes, endings) to determine the number of words parts to be collected for segmentation, and eventually to additionally adjust the language specific source code.
 
+## Publications
+
+Jānis Zuters, Guntis V. Strazds, and Kārlis Immers. Semi-Automatic Quasi-Morphological Word Segmentation for Neural Machine Translation.
+To appear.
+
+## Acknowledgements
+
+The research has been supported by the European Regional Development Fund within the research project ”Neural Network Modelling for Inflected Natural Languages” No. 1.1.1.1/16/A/215, and the Faculty of Computing, University of Latvia.
+
    [BPE]: <https://github.com/rsennrich/subword-nmt>
    [learn_prpe.py]: <https://github.com/zuters/prpe/prpe6/learn_prpe.py>
    [apply_prpe.py]: <https://github.com/zuters/prpe/prpe6/apply_prpe.py>
