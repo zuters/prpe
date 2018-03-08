@@ -43,7 +43,7 @@ where postfix "ables" consists of:
 **Running the learning script**:
 
 ```sh
-(python) ./learn_prpe.py -i {corpus} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -a {prefix rate} -b {suffix rate} -c {postfix rate} -v {vocabulary size} -l {langugae}
+prpe6/learn_prpe.py -i {corpus} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -a {prefix rate} -b {suffix rate} -c {postfix rate} -v {vocabulary size} -l {langugae}
 ```
 
 ***where***:
@@ -57,12 +57,12 @@ All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tun
 
 **Sample configuration** used for **Latvian** (see produced files in 'codefiles-lv' directory):
 ```sh
-(python) ./learn_prpe.py -i corpus.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
+prpe6/learn_prpe.py -i corpus.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
 ```
 
 **Sample configuration** used for **English** (see produced files in 'codefiles-en' directory):
 ```sh
-(python) ./learn_prpe.py -i corpus.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
+prpe6/learn_prpe.py -i corpus.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
 ```
 
 Just for a brief insight; the first 10 English prefixes collected in the learning phase (in file {prefixes}):
@@ -85,7 +85,7 @@ During this phase, input text is segmented using 'code' files produced in the le
 **Running the segmentation script**:
 
 ```sh
-(python) ./apply_prpe.py -i {input text} -o {output text} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -l {langugae} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
+prpe6/apply_prpe.py -i {input text} -o {output text} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -l {langugae} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
 ```
 
 ***where***:
@@ -132,7 +132,7 @@ Examples of valid segmentation modes: 3, 103, 2103, 1003
 
 **Sample configuration** of segmentation used for **English** (paramaters for markers omitted):
 ```sh
-(python) ./apply_prpe.py -i input.en -o output.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -l en -d 2103
+prpe6/apply_prpe.py -i input.en -o output.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -l en -d 2103
 ```
 
 ### 3. Removing segmentation ([unprocess_prpe.py])
@@ -140,12 +140,12 @@ Examples of valid segmentation modes: 3, 103, 2103, 1003
 During this operation, a segmented text is coverted back to a normal text:
 
 ```sh
-(python) ./unprocess_prpe.py -i {input text} -o {output text} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
+prpe6/unprocess_prpe.py -i {input text} -o {output text} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
 ```
 
 For example:
 ```sh
-(python) ./unprocess_prpe.py -i input.en -o output.en -d 2103 -m / -n |
+prpe6/unprocess_prpe.py -i input.en -o output.en -d 2103 -m / -n |
 ```
 will convert text
 *"| un/ believ/ able sales/ persons"*
