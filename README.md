@@ -28,11 +28,15 @@ During this phase several 'code' files are produced from the {corpus} representi
   - {endings}
   - vocabulary of most frequent {words} to avoid segmentation
 
-**Terminology of word parts**
-Splitting "unbelievables":
+**Terminology of word parts in the context of this program**
+Word "unbelievables" consists of:
+prefix: **un**
+root: **believ**
+postfix: **ables**
+where postfix "ables" consists of:
+suffix: **abl**
+ending: **es**
 
-| prefix | root   | suffix | ending | 
-|  un    | believ |  abl  |  es   | 
 
 **Running the learning script**:
 
