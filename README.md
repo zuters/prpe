@@ -29,10 +29,12 @@ During this phase several 'code' files are produced from the {corpus} representi
   - vocabulary of most frequent {words} to avoid segmentation
 
 **Terminology of word parts in the context of this program**
+
 Word "unbelievables" consists of:
  * prefix: **un**
  * root: **believ**
  * postfix: **ables**
+
 where postfix "ables" consists of:
  * suffix: **abl**
  * ending: **es**
@@ -64,16 +66,16 @@ All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tun
 ```
 
 Just for a brief insight; the first 10 English prefixes collected in the learning phase (in file {prefixes}):
- -- re 1
- -- un 2
- -- de 3
- -- in 4
- -- dis 5
- -- mis 6
- -- sub 7
- -- over 8
- -- ac 9
- -- im 10
+ * re 1
+ * un 2
+ * de 3
+ * in 4
+ * dis 5
+ * mis 6
+ * sub 7
+ * over 8
+ * ac 9
+ * im 10
 
 
 ### Phase #2. Segmentation ([apply_prpe.py])
