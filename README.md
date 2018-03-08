@@ -1,6 +1,6 @@
-# PRPE (Prefix-Root-Postfix-Encoding) segmentator
+# PRPE (Prefix-Root-Postfix-Encoding) Segmentator
 
-This repository contains text segmentation scripts for machine translation: [learn_prpe.py], [apply_prpe.py], [unprocess_prpe.py], [prpe.py].
+This repository contains python (2 and 3) text segmentation scripts for machine translation.
 
 ## The main principles
 
@@ -9,8 +9,7 @@ This repository contains text segmentation scripts for machine translation: [lea
   - Requires minor adaptation for using in other languages:
   -- small source code changes
   -- tuning of hyperparameters
-  - to support open-vocabulary, segmented texts should be post-processed using [BPE]
-  - python 2/3 compatible
+  - to support open-vocabulary (in machine translation), segmented texts should be post-processed (i.e., using [BPE])
 
 ## Usage instructions
 
@@ -19,44 +18,137 @@ PRPE is used in the following way:
   - Segmentation phase (using produced files of the previous phase): apply_prpe.py
   - Removing segmentation: unprocess_prpe.py
 
-### Phase #1. Learning
+### Phase #1. Learning ([learn_prpe.py])
 
 During this phase several 'code' files are produced from the {corpus} representing building blocks for the segmentation:
   - {prefixes}
   - {roots}
   - {suffixes}
-  - {postfixes} (actually in the lastest version this particular file is redundant for segmentation)
+  - {postfixes} (in the lastest version this particular file is redundant for segmentation but is left as legacy and for the purpose to potentially assist in hyperparamter adaptation)
   - {endings}
   - vocabulary of most frequent {words} to avoid segmentation
 
-Running the learning script:
+**Running the learning script**:
 
 ```sh
 (python) ./learn_prpe.py -i {corpus} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -a {prefix rate} -b {suffix rate} -c {postfix rate} -v {vocabulary size} -l {langugae}
 ```
 
-where:
-  -- prefix rate: how many prefixes to collect (greater than 1 means exact number, less means percentage)
-  -- suffix rate: how many suffixes to collect (greater than 1 means exact number, less means percentage)
-  -- postfix rate: how many postfixes to collect (greater than 1 means exact number, less means percentage) (in the latest version this particular parameter is redundant)
-  -- vocabulary size: how many the most frequent words to store to avoid segmentations for them (in order to reduce number of segments)
-  -- language: for the present, only 'lv' and 'en' are acceptable; otherwise 'en' scripts to check word parts will be switched
+***where***:
+  - prefix rate: how many prefixes to collect (greater than 1 means exact number, less means percentage)
+  - suffix rate: how many suffixes to collect (greater than 1 means exact number, less means percentage)
+  - postfix rate: how many postfixes to collect (greater than 1 means exact number, less means percentage) (in the latest version this particular parameter is redundant)
+  - vocabulary size: how many the most frequent words to store to avoid segmentations for them (in order to reduce number of segments)
+  - language: for the present, only 'lv' and 'en' are acceptable; otherwise 'en' scripts to check word parts will be switched
 
 All the rates (prefix, suffix, postfix, vocabulary) should be experimentally tuned. Conditions for roots and endings (not represented in parameters) are hardcoded.
 
-Example configuration used for Latvian (produced files see in 'codefiles-lv' directory):
+**Example configuration** used for **Latvian** (produced files see in 'codefiles-lv' directory):
 ```sh
-(python) ./learn_prpe.py -i input.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
+(python) ./learn_prpe.py -i corpus.lv -p prefixes.lv -r roots.lv -s suffixes.lv -t postfixes.lv -u endings.lv -w words.lv -a 32 -b 1000 -c 0.1 -v 5000 -l lv
 ```
 
-Example configuration used for English (produced files see in 'codefiles-en' directory):
+**Example configuration** used for **English** (produced files see in 'codefiles-en' directory):
 ```sh
-(python) ./learn_prpe.py -i input.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
+(python) ./learn_prpe.py -i corpus.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -a 32 -b 200 -c 180 -v 5000 -l en
 ```
 
+Just for a brief insight; the first 10 English prefixes collected in the learning phase (in file {prefixes}):
+ -- re 1
+ -- un 2
+ -- de 3
+ -- in 4
+ -- dis 5
+ -- mis 6
+ -- sub 7
+ -- over 8
+ -- ac 9
+ -- im 10
+
+
+### Phase #2. Segmentation ([apply_prpe.py])
+
+During this phase, input text is segmented using 'code' files produced in the learning phase.
+
+**Running the segmentation script**:
+
+```sh
+(python) ./apply_prpe.py -i {input text} -o {output text} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -l {langugae} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
+```
+
+***where***:
+  - prefixes, roots, suffixes, postfixes, endings: files produced in the learning phase
+  - language: for the present, only 'lv' and 'en' are acceptable
+  - segmentation mode -- to determine segmentation optimization, processing words with uppercase and usage of segmentation markers (see below)
+  - segmentation marker -- a character or sequence of character to mark segments to constitute words (if sequence of digits, then is converted to the character represented by that number, default '9474')
+  - upercase marker -- a character or sequence of character to mark next word as starting with uppercase (if sequence of digits, then is converted to the character represented by that number, default '9553')
+
+##### Segmentation mode
+
+Segmentation mode is a positive integer number up to 4 digits in the form ABCC, where
+  - A: optimization mode
+  - B: uppercase mode
+  - CC: marking mode
+
+In the next examples the text *"Unbelievable salespersons"* will be used, "/" -- segmentation marker, "|" -- uppercase marker.
+
+**A: Optimization mode**
+Optimization mode is intended to reduce number of segments, thus the length of sequence of segments.
+
+Value 0 -- no optimization:
+*Un/ believ/ able sal/ es/ person/ s*
+
+Value 1 -- small optimization:
+*Un/ believ/ able sales/ persons*
+
+Value 2 -- full optimization:
+*Unbeliev/ able sales/ person/ s*
+
+**B: Uppercase mode**
+Uppercase mode converts word starting with uppercase and the rest symbols in lowercase to lowercase with putting uppercase marker before it:
+
+Value 0 -- uppercase processing ON:
+*| unbeliev/ able sales/ person/ s*
+
+Value 1 -- uppercase processing OFF:
+*Unbeliev/ able sales/ person/ s*
+
+**C: Marking mode**
+Although there are modes 0,, 1, 2, 3 available, we suggest using mode 3 (marker indicates that the next segment is of the same word)
+
+**Example configuration** of segmentation used for **English** (paramaters for markers omitted):
+```sh
+(python) ./apply_prpe.py -i input.en -o output.en -p prefixes.en -r roots.en -s suffixes.en -t postfixes.en -u endings.en -w words.en -l en -d 2103
+```
+
+### Phase #3. Removing segmentation ([unprocess_prpe.py])
+
+During this operation, a segmented text is coverted back to normal text:
+
+```sh
+(python) ./unprocess_prpe.py -i {input text} -o {output text} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
+```
+
+For example:
+```sh
+(python) ./unprocess_prpe.py -i input.en -o output.en -d 2103 -m / -n |
+```
+will convert the text
+*"| un/ believ/ able sales/ persons"*
+back into
+*"Unbelievable salespersons"*
+
+### Adaptation to other languages
+
+To make the adaptation, it is unfortunately required that you have some understanding about the language.
+
+A brief activity list for adaptaion:
+  - in [prpe.py] add the language specific information to the function "add_heuristics" which can eventually cause creation of several language specific function (such as "is_good_root")
+  - run learning phase with looser hyperparameters for code files, i.e., "-a 1000 -b 0.1 -c 0.1"
+  - go through the code files (prefixes, postfixes, suffixes, endings) to determine the number of words parts to be collected for segmentation, and eventually to additionally adjust the language specific source code.
 
    [BPE]: <https://github.com/rsennrich/subword-nmt>
-   [learn_prpe.py]: <https://github.com/zuters/prpe/learn_prpe.py>
-   [apply_prpe.py]: <https://github.com/zuters/prpe/apply_prpe.py>
-   [unprocess_prpe.py]: <https://github.com/zuters/prpe/unprocess_prpe.py>
-   [prpe.py]: <https://github.com/zuters/prpe/prpe.py>
+   [learn_prpe.py]: <https://github.com/zuters/prpe/prpe6/learn_prpe.py>
+   [apply_prpe.py]: <https://github.com/zuters/prpe/prpe6/apply_prpe.py>
+   [unprocess_prpe.py]: <https://github.com/zuters/prpe/prpe6/unprocess_prpe.py>
+   [prpe.py]: <https://github.com/zuters/prpe/prpe6/prpe.py>
