@@ -30,12 +30,12 @@ During this phase several 'code' files are produced from the {corpus} representi
 
 **Terminology of word parts in the context of this program**
 Word "unbelievables" consists of:
-prefix: **un**
-root: **believ**
-postfix: **ables**
+ * prefix: **un**
+ * root: **believ**
+ * postfix: **ables**
 where postfix "ables" consists of:
-suffix: **abl**
-ending: **es**
+ * suffix: **abl**
+ * ending: **es**
 
 
 **Running the learning script**:
