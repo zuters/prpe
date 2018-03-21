@@ -152,7 +152,21 @@ will convert text
 back into
 *"Unbelievable salespersons"*
 
-### 4. Adaptation to other languages
+### 4. Summary of the best configurations for NMT discovered by far
+
+**English:**
+ - Prefix rate a = 32
+ - Suffix rate b = 200
+ - Vocabulary size v = 5000 (or less if NMT system not sensitive to long sequences)
+ - Segmentation mode d = 2003
+
+**Latvian:**
+ - Prefix rate a = 32
+ - Suffix rate b = 1000
+ - Vocabulary size v = 5000 (or less if NMT system not sensitive to long sequences)
+ - Segmentation mode d = 2003
+
+### 5. Adaptation to other languages
 
 To make the adaptation, it is unfortunately required that you have some understanding about the language.
 
