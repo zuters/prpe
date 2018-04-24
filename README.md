@@ -85,7 +85,7 @@ During this phase, input text is segmented using 'code' files produced in the le
 **Running the segmentation script**:
 
 ```sh
-prpe6/apply_prpe.py -i {input text} -o {output text} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -l {langugae} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
+prpe6/apply_prpe.py -i {input text} -o {output text} -p {prefixes} -r {roots} -s {suffixes} -t {postfixes} -u {endings} -w {words} -l {language} -d {segmentation mode} -m {segmentation marker} -n {uppercase marker}
 ```
 
 ***where***:
@@ -177,7 +177,7 @@ A brief activity list for adaptaion:
 
 ## Publications
 
-Jānis Zuters, Guntis V. Strazds, and Kārlis Immers. Semi-Automatic Quasi-Morphological Word Segmentation for Neural Machine Translation.
+Jānis Zuters, Gus Strazds, and Kārlis Immers. Semi-Automatic Quasi-Morphological Word Segmentation for Neural Machine Translation.
 To appear.
 
 ## Acknowledgements
