@@ -1,6 +1,6 @@
 # PRPE (Prefix-Root-Postfix-Encoding) Segmenter
 
-This repository contains python (2 and 3) text segmentation scripts for machine translation.
+This repository contains Python (2 and 3) text segmentation scripts for machine translation.
 
 ## The main principles
 
@@ -177,8 +177,7 @@ A brief activity list for adaptaion:
 
 ## Publications
 
-Jānis Zuters, Gus Strazds, and Kārlis Immers. Semi-Automatic Quasi-Morphological Word Segmentation for Neural Machine Translation.
-To appear.
+Jānis Zuters, Gus Strazds, and Kārlis Immers. Semi-automatic Quasi-morphological Word Segmentation for Neural Machine Translation: 13th International Baltic Conference, DB&IS 2018, Trakai, Lithuania, July 1-4, 2018, Proceedings.
 
 ## Acknowledgements
 
