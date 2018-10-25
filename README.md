@@ -170,7 +170,7 @@ back into
 
 To make the adaptation, it is unfortunately required that you have some understanding about the language.
 
-A brief activity list for adaptaion:
+A brief activity list for adaptation:
   - in [prpe.py], add the language specific information to the function "add_heuristics" which can eventually cause creation of several language specific function (such as "is_good_root")
   - run learning phase with looser hyperparameters for code files, i.e., "-a 1000 -b 0.1 -c 0.1"
   - go through the code files (prefixes, postfixes, suffixes, endings) to determine the number of words parts to be collected for segmentation, and eventually to additionally adjust the language specific source code.
