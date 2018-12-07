@@ -813,7 +813,7 @@ def obtain_segment_track(bestprecodetree,roottree,bestsuffcodetree,bestpostcodet
     """ Collect list of segmentation tracks, each in form (prefix, root, postfix)+ and compute weights (the less, the better)
         and return the best one
     """
-    if word in bestvocab:
+    if word in bestvocab or len (word)>20:
         return []
     prematrix = []
 #    print("len-bestprecodetree",len(bestprecodetree))
